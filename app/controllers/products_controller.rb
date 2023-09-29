@@ -106,4 +106,38 @@ class ProductsController < ApplicationController
   def product_params
     params.require(:product).permit(:name, :price, :description, :category_id)
   end
+
+  def filter_name products, name
+    if name
+      products = products.select do |product|
+        product.name.include?(name)
+      end
+    end
+    products
+  end
+
+  def filter_category products, category
+    if category
+      products = products.select do |product|
+        Category.find_by(id: product.category_id).name == category
+      end
+    end
+    products
+  end
+
+  def filter_price products, price
+    if price == "<1tr"
+      products.select do |product|
+        product.price < 1_000_000
+      end
+    elsif price == ">5tr"
+      products.select do |product|
+        product.price > 5_000_000
+      end
+    else
+      products.select do |product|
+        product.price < 5_000_000 && product.price > 1_000_000
+      end
+    end
+  end
 end
