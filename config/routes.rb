@@ -6,5 +6,7 @@ Rails.application.routes.draw do
     get '/login', to: 'users#login'
     get '/signup', to: 'users#new'
     get '/filter', to: 'products#filter'
+    post '/search', to: 'products#search'
+    get '/search', to: "products#render_search_page"
   end
 end
