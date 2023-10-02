@@ -93,6 +93,8 @@ class ProductsController < ApplicationController
     render "products/search"
   end
 
+  def add_to_cart; end
+
   private
   # Use callbacks to share common setup or constraints between actions.
   def load_product

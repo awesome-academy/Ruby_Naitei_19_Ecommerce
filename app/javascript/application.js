@@ -18,12 +18,3 @@ import "custom/modernizr-2.6.2.min"
 import "custom/move-top"
 import "custom/owl.carousel"
 import "custom/simplyCountdown"
-
-const searchInput = document.querySelector(".search_input")
-searchInput.addEventListener("input", function() {
-  console.log("Input changed")
-})
-
-document.addEventListener("keydown", function() {
-  console.log("keydown")
-})
