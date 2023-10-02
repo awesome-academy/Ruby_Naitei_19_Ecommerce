@@ -5,3 +5,26 @@
 #
 #   movies = Movie.create([{ name: "Star Wars" }, { name: "Lord of the Rings" }])
 #   Character.create(name: "Luke", movie: movies.first)
+
+User.create!(name: "Example Admin",email: "admin@railstutorial.org",password: "foobar",password_confirmation: "foobar", role: "admin")
+User.create!(name: "Example User",email: "user@railstutorial.org",password: "foobar",password_confirmation: "foobar", role: "user")
+
+10.times do |n|
+  name = "Category #{n+1}"
+  description = "This is a category"
+
+  Category.create!(name: name, description: description)
+end
+
+50.times do |n|
+  name = "Product #{n+1}"
+  price = rand(100000..3000000)
+  description = "This is a product"
+  category_id = rand(1..10)
+  Product.create!(name: name,price: price,description: description, category_id: category_id)
+  4.times do |m|
+    image = Faker::LoremFlickr.image(size: "500x500", search_terms: ['products'])
+    product_id = n+1
+    ProductImage.create!(image: image,product_id: product_id)
+  end
+end

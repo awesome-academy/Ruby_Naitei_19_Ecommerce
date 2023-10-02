@@ -1,10 +1,11 @@
 class ProductsController < ApplicationController
   before_action :set_product, only: %i(show edit update destroy)
+  before_action :load_categories
+  before_action :load_products
+  require "pagy/extras/array"
 
   # GET /products or /products.json
-  def index
-    @products = Product.all
-  end
+  def index; end
 
   # GET /products/1 or /products/1.json
   def show; end
@@ -70,10 +71,27 @@ class ProductsController < ApplicationController
 
   def cart; end
 
+  def filter
+    filtered_products = Product.joins(:category)
+                               .merge(Category.by_name(params[:category]))
+    @pagy, @products = pagy(filtered_products,
+                            items: Settings.product_per_page)
+    render template: "products/index"
+  end
+
   private
   # Use callbacks to share common setup or constraints between actions.
   def set_product
     @product = Product.find_by id: params[:id]
+  end
+
+  def load_categories
+    @categories = Category.ordered_by_name
+  end
+
+  def load_products
+    @pagy, @products = pagy(Product.ordered_by_name,
+                            items: Settings.product_per_page)
   end
 
   # Only allow a list of trusted parameters through.

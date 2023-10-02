@@ -13,3 +13,61 @@
  *= require_tree .
  *= require_self
  */
+
+@import "font-awesome";
+
+* {
+  font-family: FontAwesome;
+}
+
+.inner-sec-shop {
+  position: relative;
+}
+
+.filter__button {
+  position: absolute;
+  right: 5rem;
+  top: 0;
+  cursor: pointer;
+
+  z-index: 10;
+}
+
+.filter__checkbox {
+  display: none;
+}
+
+.filter__dropdown {
+  height: 0;
+  position: absolute;
+  right: 5rem;
+  top: 3rem;
+  background-color: #fff;
+  transition: all 0.5s;
+  overflow: scroll;
+  list-style: none;
+  width: 20rem;
+  z-index: 10;
+}
+
+#filter-toggle:checked + .filter__dropdown {
+  background-color: #fff;
+  height: 20rem;
+  box-shadow: 0 2px 4px;
+}
+
+.filter__dropdown li {
+  padding: 1rem;
+  transition: all 0.5s;
+  color: black
+}
+
+.filter__dropdown li:hover {
+  background-color: black;
+  color: white;
+  cursor: pointer;
+}
+
+.filter__icon{
+  font-size: 2rem;
+}

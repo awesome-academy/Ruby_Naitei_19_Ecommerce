@@ -1,18 +1,4 @@
 <p style="color: green"><%= notice %></p>
-
-<h1>Products</h1>
-
-<div id="products">
-  <% @products.each do |product| %>
-    <%= render product %>
-    <p>
-      <%= link_to "Show this product", product %>
-    </p>
-  <% end %>
-</div>
-
-<%= link_to "New product", new_product_path %>
-
 <!DOCTYPE html>
 <html lang="zxx">
 
@@ -20,7 +6,7 @@
 	<title>Ecommerce</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta charset="utf-8">
-	<script>
+	<script type="module">
 		addEventListener("load", function () {
 			setTimeout(hideURLbar, 0);
 		}, false);
@@ -32,6 +18,7 @@
 	<link href="//fonts.googleapis.com/css?family=Inconsolata:400,700" rel="stylesheet">
 	<link href="//fonts.googleapis.com/css?family=Poppins:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800"
 	    rel="stylesheet">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 
 <body>
@@ -67,8 +54,7 @@
 								<input type="hidden" name="display" value="1">
 								<button class="top_googles_cart" type="submit" name="submit" value="">
 									My Cart
-									<i class="fas fa-cart-arrow-down"></i>
-								</button>
+									<i class="fa fa-shopping-cart"></i>
 							</form>
 						</li>
 					</ul>
@@ -206,7 +192,7 @@
 								<li>
 									<div class="row">
 										<div class="col-md-4 media-list span4 text-left">
-											<h5 class="tittle-w3layouts-sub"> Tittle goes here </h5>
+											<h5 class="tittle-w3layouts-sub"> Title goes here </h5>
 											<ul>
 												<li class="media-mini mt-3">
 													<a href="shop.html">Designer Glasses</a>
@@ -360,372 +346,25 @@
 		<div class="container-fluid">
 			<div class="inner-sec-shop px-lg-4 px-3">
 				<h3 class="tittle-w3layouts my-lg-4 my-4">New Arrivals for you </h3>
+				<input type="checkbox" class="filter__checkbox" id="filter-toggle">
+
+				<ul class="filter__dropdown">
+					<% @categories.each do |category| %>
+						<%= link_to filter_path(:category => category.name) do %>
+							<li><%= category.name %></li>
+						<% end %>
+					<% end %>
+				</ul>
+        <label for="filter-toggle" class="filter__button">
+          <span class="filter__icon">
+						Filter
+						<i class="fa fa-filter"></i>
+					</span>
+        </label>
 				<div class="row">
-					<!-- /womens -->
-					<div class="col-md-3 product-men women_two">
-						<div class="product-googles-info googles">
-							<div class="men-pro-item">
-								<div class="men-thumb-item">
-									<img src="images/s1.jpg" class="img-fluid" alt="">
-									<div class="men-cart-pro">
-										<div class="inner-men-cart-pro">
-											<a href="single.html" class="link-product-add-cart">Quick View</a>
-										</div>
-									</div>
-									<span class="product-new-top">New</span>
-								</div>
-								<div class="item-info-product">
-									<div class="info-product-price">
-										<div class="grid_meta">
-											<div class="product_price">
-												<h4>
-													<a href="single.html">Farenheit (Grey)</a>
-												</h4>
-												<div class="grid-price mt-2">
-													<span class="money ">$575.00</span>
-												</div>
-											</div>
-											<ul class="stars">
-												<li>
-													<a href="#">
-														<i class="fa fa-star" aria-hidden="true"></i>
-													</a>
-												</li>
-												<li>
-													<a href="#">
-														<i class="fa fa-star" aria-hidden="true"></i>
-													</a>
-												</li>
-												<li>
-													<a href="#">
-														<i class="fa fa-star" aria-hidden="true"></i>
-													</a>
-												</li>
-												<li>
-													<a href="#">
-														<i class="fa fa-star" aria-hidden="true"></i>
-													</a>
-												</li>
-												<li>
-													<a href="#">
-														<i class="fa fa-star-half-o" aria-hidden="true"></i>
-													</a>
-												</li>
-											</ul>
-										</div>
-										<div class="googles single-item hvr-outline-out">
-											<form action="#" method="post">
-												<input type="hidden" name="cmd" value="_cart">
-												<input type="hidden" name="add" value="1">
-												<input type="hidden" name="googles_item" value="Farenheit">
-												<input type="hidden" name="amount" value="575.00">
-												<button type="submit" class="googles-cart pgoogles-cart">
-													<i class="fas fa-cart-plus"></i>
-												</button>
-
-
-											</form>
-
-										</div>
-									</div>
-									<div class="clearfix"></div>
-								</div>
-							</div>
-						</div>
-					</div>
-					<div class="col-md-3 product-men women_two">
-						<div class="product-googles-info googles">
-							<div class="men-pro-item">
-								<div class="men-thumb-item">
-									<img src="images/s2.jpg" class="img-fluid" alt="">
-									<div class="men-cart-pro">
-										<div class="inner-men-cart-pro">
-											<a href="single.html" class="link-product-add-cart">Quick View</a>
-										</div>
-									</div>
-									<span class="product-new-top">New</span>
-								</div>
-								<div class="item-info-product">
-
-									<div class="info-product-price">
-										<div class="grid_meta">
-											<div class="product_price">
-												<h4>
-													<a href="single.html">Opium (Grey)</a>
-												</h4>
-												<div class="grid-price mt-2">
-													<span class="money ">$325.00</span>
-												</div>
-											</div>
-											<ul class="stars">
-												<li>
-													<a href="#">
-														<i class="fa fa-star" aria-hidden="true"></i>
-													</a>
-												</li>
-												<li>
-													<a href="#">
-														<i class="fa fa-star" aria-hidden="true"></i>
-													</a>
-												</li>
-												<li>
-													<a href="#">
-														<i class="fa fa-star" aria-hidden="true"></i>
-													</a>
-												</li>
-												<li>
-													<a href="#">
-														<i class="fa fa-star-half-o" aria-hidden="true"></i>
-													</a>
-												</li>
-												<li>
-													<a href="#">
-														<i class="fa fa-star-o" aria-hidden="true"></i>
-													</a>
-												</li>
-											</ul>
-										</div>
-										<div class="googles single-item hvr-outline-out">
-											<form action="#" method="post">
-												<input type="hidden" name="cmd" value="_cart">
-												<input type="hidden" name="add" value="1">
-												<input type="hidden" name="googles_item" value="Opium (Grey)">
-												<input type="hidden" name="amount" value="325.00">
-												<button type="submit" class="googles-cart pgoogles-cart">
-													<i class="fas fa-cart-plus"></i>
-												</button>
-
-
-											</form>
-
-										</div>
-									</div>
-									<div class="clearfix"></div>
-								</div>
-							</div>
-						</div>
-					</div>
-					<div class="col-md-3 product-men women_two">
-						<div class="product-googles-info googles">
-							<div class="men-pro-item">
-								<div class="men-thumb-item">
-									<img src="images/s3.jpg" class="img-fluid" alt="">
-									<div class="men-cart-pro">
-										<div class="inner-men-cart-pro">
-											<a href="single.html" class="link-product-add-cart">Quick View</a>
-										</div>
-									</div>
-									<span class="product-new-top">New</span>
-								</div>
-								<div class="item-info-product">
-
-									<div class="info-product-price">
-										<div class="grid_meta">
-											<div class="product_price">
-												<h4>
-													<a href="single.html">Kenneth Cole</a>
-												</h4>
-												<div class="grid-price mt-2">
-													<span class="money ">$575.00</span>
-												</div>
-											</div>
-											<ul class="stars">
-												<li>
-													<a href="#">
-														<i class="fa fa-star" aria-hidden="true"></i>
-													</a>
-												</li>
-												<li>
-													<a href="#">
-														<i class="fa fa-star" aria-hidden="true"></i>
-													</a>
-												</li>
-												<li>
-													<a href="#">
-														<i class="fa fa-star" aria-hidden="true"></i>
-													</a>
-												</li>
-												<li>
-													<a href="#">
-														<i class="fa fa-star" aria-hidden="true"></i>
-													</a>
-												</li>
-												<li>
-													<a href="#">
-														<i class="fa fa-star-half-o" aria-hidden="true"></i>
-													</a>
-												</li>
-											</ul>
-										</div>
-										<div class="googles single-item hvr-outline-out">
-											<form action="#" method="post">
-												<input type="hidden" name="cmd" value="_cart">
-												<input type="hidden" name="add" value="1">
-												<input type="hidden" name="googles_item" value="Kenneth Cole">
-												<input type="hidden" name="amount" value="575.00">
-												<button type="submit" class="googles-cart pgoogles-cart">
-													<i class="fas fa-cart-plus"></i>
-												</button>
-
-											</form>
-
-										</div>
-									</div>
-									<div class="clearfix"></div>
-								</div>
-							</div>
-						</div>
-					</div>
-					<div class="col-md-3 product-men women_two">
-						<div class="product-googles-info googles">
-							<div class="men-pro-item">
-								<div class="men-thumb-item">
-									<img src="images/s4.jpg" class="img-fluid" alt="">
-									<div class="men-cart-pro">
-										<div class="inner-men-cart-pro">
-											<a href="single.html" class="link-product-add-cart">Quick View</a>
-										</div>
-									</div>
-									<span class="product-new-top">New</span>
-								</div>
-								<div class="item-info-product">
-
-									<div class="info-product-price">
-										<div class="grid_meta">
-											<div class="product_price">
-												<h4>
-													<a href="single.html">Farenheit Oval </a>
-												</h4>
-												<div class="grid-price mt-2">
-													<span class="money ">$325.00</span>
-												</div>
-											</div>
-											<ul class="stars">
-												<li>
-													<a href="#">
-														<i class="fa fa-star" aria-hidden="true"></i>
-													</a>
-												</li>
-												<li>
-													<a href="#">
-														<i class="fa fa-star" aria-hidden="true"></i>
-													</a>
-												</li>
-												<li>
-													<a href="#">
-														<i class="fa fa-star" aria-hidden="true"></i>
-													</a>
-												</li>
-												<li>
-													<a href="#">
-														<i class="fa fa-star-half-o" aria-hidden="true"></i>
-													</a>
-												</li>
-												<li>
-													<a href="#">
-														<i class="fa fa-star-o" aria-hidden="true"></i>
-													</a>
-												</li>
-											</ul>
-										</div>
-										<div class="googles single-item hvr-outline-out">
-											<form action="#" method="post">
-												<input type="hidden" name="cmd" value="_cart">
-												<input type="hidden" name="add" value="1">
-												<input type="hidden" name="googles_item" value="Farenheit Oval">
-												<input type="hidden" name="amount" value="325.00">
-												<button type="submit" class="googles-cart pgoogles-cart">
-													<i class="fas fa-cart-plus"></i>
-												</button>
-
-
-											</form>
-
-										</div>
-									</div>
-									<div class="clearfix"></div>
-								</div>
-							</div>
-						</div>
-					</div>
-
-          <div class="col-md-3 product-men women_two">
-						<div class="product-googles-info googles">
-							<div class="men-pro-item">
-								<div class="men-thumb-item">
-									<img src="images/s4.jpg" class="img-fluid" alt="">
-									<div class="men-cart-pro">
-										<div class="inner-men-cart-pro">
-											<a href="single.html" class="link-product-add-cart">Quick View</a>
-										</div>
-									</div>
-									<span class="product-new-top">New</span>
-								</div>
-								<div class="item-info-product">
-
-									<div class="info-product-price">
-										<div class="grid_meta">
-											<div class="product_price">
-												<h4>
-													<a href="single.html">Farenheit Oval </a>
-												</h4>
-												<div class="grid-price mt-2">
-													<span class="money ">$325.00</span>
-												</div>
-											</div>
-											<ul class="stars">
-												<li>
-													<a href="#">
-														<i class="fa fa-star" aria-hidden="true"></i>
-													</a>
-												</li>
-												<li>
-													<a href="#">
-														<i class="fa fa-star" aria-hidden="true"></i>
-													</a>
-												</li>
-												<li>
-													<a href="#">
-														<i class="fa fa-star" aria-hidden="true"></i>
-													</a>
-												</li>
-												<li>
-													<a href="#">
-														<i class="fa fa-star-half-o" aria-hidden="true"></i>
-													</a>
-												</li>
-												<li>
-													<a href="#">
-														<i class="fa fa-star-o" aria-hidden="true"></i>
-													</a>
-												</li>
-											</ul>
-										</div>
-										<div class="googles single-item hvr-outline-out">
-											<form action="#" method="post">
-												<input type="hidden" name="cmd" value="_cart">
-												<input type="hidden" name="add" value="1">
-												<input type="hidden" name="googles_item" value="Farenheit Oval">
-												<input type="hidden" name="amount" value="325.00">
-												<button type="submit" class="googles-cart pgoogles-cart">
-													<i class="fas fa-cart-plus"></i>
-												</button>
-
-
-											</form>
-
-										</div>
-									</div>
-									<div class="clearfix"></div>
-								</div>
-							</div>
-						</div>
-					</div>
+					<%= render @products %>
 				</div>
-				<!-- //womens -->
-
-				<!--//row-->
-				<!--/meddle-->
+				<%== pagy_nav(@pagy) if @pagy.pages > 1 %>
 				<div class="row">
 					<div class="col-md-12 middle-slider my-4">
 						<div class="middle-text-info ">
@@ -1462,7 +1101,6 @@
 	<!-- //footer -->
 
 	<!--jQuery-->
-	<script src="js/jquery-2.2.3.min.js"></script>
 	<!-- newsletter modal -->
 	<!-- Modal -->
 	<!-- Modal -->
@@ -1495,7 +1133,7 @@
 			</div>
 		</div>
 	</div>
-	<script>
+	<script type="module">
 		$(document).ready(function () {
 			$("#myModal").modal();
 		});
@@ -1503,13 +1141,7 @@
 	<!-- // modal -->
 
 	<!--search jQuery-->
-	<script src="js/modernizr-2.6.2.min.js"></script>
-	<script src="js/classie-search.js"></script>
-	<script src="js/demo1-search.js"></script>
-	<!--//search jQuery-->
-	<!-- cart-js -->
-	<script src="js/minicart.js"></script>
-	<script>
+	<script type="module">
 		googles.render();
 
 		googles.cart.on('googles_checkout', function (evt) {
@@ -1523,7 +1155,7 @@
 		});
 	</script>
 	<!-- //cart-js -->
-	<script>
+	<script type="module">
 		$(document).ready(function () {
 			$(".button-log a").click(function () {
 				$(".overlay-login").fadeToggle(200);
@@ -1538,9 +1170,7 @@
 	</script>
 	<!-- carousel -->
 	<!-- Count-down -->
-	<script src="js/simplyCountdown.js"></script>
-	<link href="css/simplyCountdown.css" rel='stylesheet' type='text/css' />
-	<script>
+	<script type="module">
 		var d = new Date();
 		simplyCountdown('simply-countdown-custom', {
 			year: d.getFullYear(),
@@ -1549,8 +1179,7 @@
 		});
 	</script>
 	<!--// Count-down -->
-	<script src="js/owl.carousel.js"></script>
-	<script>
+	<script type="module">
 		$(document).ready(function () {
 			$('.owl-carousel').owlCarousel({
 				loop: true,
@@ -1584,7 +1213,7 @@
 
 
 	<!-- dropdown nav -->
-	<script>
+	<script type="module">
 		$(document).ready(function () {
 			$(".dropdown").hover(
 				function () {
@@ -1599,9 +1228,7 @@
 		});
 	</script>
 	<!-- //dropdown nav -->
-  <script src="js/move-top.js"></script>
-    <script src="js/easing.js"></script>
-    <script>
+    <script type="module">
         jQuery(document).ready(function($) {
             $(".scroll").click(function(event) {
                 event.preventDefault();
@@ -1611,7 +1238,7 @@
             });
         });
     </script>
-    <script>
+    <script type="module">
         $(document).ready(function() {
             /*
             						var defaults = {
@@ -1630,7 +1257,6 @@
     </script>
     <!--// end-smoth-scrolling -->
 
-	<script src="js/bootstrap.js"></script>
 	<!-- js file -->
 </body>
 

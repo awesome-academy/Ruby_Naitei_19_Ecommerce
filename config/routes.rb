@@ -5,5 +5,6 @@ Rails.application.routes.draw do
     get '/cart', to: 'products#cart'
     get '/login', to: 'users#login'
     get '/signup', to: 'users#new'
+    get '/filter', to: 'products#filter'
   end
 end
