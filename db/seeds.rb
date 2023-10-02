@@ -21,7 +21,9 @@ end
   price = rand(100000..3000000)
   description = "This is a product"
   category_id = rand(1..10)
-  Product.create!(name: name,price: price,description: description, category_id: category_id)
+  number = rand(0..100)
+
+  Product.create!(name: name,price: price,description: description, number: number, category_id: category_id)
   4.times do |m|
     image = Faker::LoremFlickr.image(size: "500x500", search_terms: ['products'])
     product_id = n+1

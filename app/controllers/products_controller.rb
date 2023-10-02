@@ -8,7 +8,9 @@ class ProductsController < ApplicationController
   def index; end
 
   # GET /products/1 or /products/1.json
-  def show; end
+  def show
+    @images = @product.product_images
+  end
 
   # GET /products/new
   def new
@@ -95,6 +97,8 @@ class ProductsController < ApplicationController
   def render_search_page
     render "products/search"
   end
+
+  def add_to_cart; end
 
   private
   # Use callbacks to share common setup or constraints between actions.
