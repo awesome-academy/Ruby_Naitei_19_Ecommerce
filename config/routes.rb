@@ -7,6 +7,7 @@ Rails.application.routes.draw do
     get "/filter", to: "products#filter"
     post "/search", to: "products#search"
     get "/search", to: "products#render_search_page"
+    post "/cart", to: "products#add_to_cart"
     post "/login", to: "sessions#create"
     delete "/logout", to: "sessions#destroy"
     get "/profile", to: "users#show"
