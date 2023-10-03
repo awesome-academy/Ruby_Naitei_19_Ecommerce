@@ -110,15 +110,6 @@ class ProductsController < ApplicationController
     @categories = Category.all
   end
 
-  def load_categories
-    @categories = Category.ordered_by_name
-  end
-
-  def load_products
-    @pagy, @products = pagy(Product.ordered_by_name,
-                            items: Settings.product_per_page)
-  end
-
   # Only allow a list of trusted parameters through.
   def product_params
     params.require(:product).permit(:name, :price, :description, :category_id)
