@@ -1,2 +1,3 @@
 email_length: 50
 email_regeX: '/\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i'
+product_per_page: 20

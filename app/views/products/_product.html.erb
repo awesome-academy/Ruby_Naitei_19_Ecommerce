@@ -2,7 +2,7 @@
   <div class="product-googles-info googles">
     <div class="men-pro-item">
       <div class="men-thumb-item">
-        <img src="images/s4.jpg" class="img-fluid" alt="">
+        <img src=<%= product.product_images[0].image%> class="img-fluid" alt="">
         <div class="men-cart-pro">
           <div class="inner-men-cart-pro">
             <a href="single.html" class="link-product-add-cart">Quick View</a>
@@ -16,10 +16,10 @@
           <div class="grid_meta">
             <div class="product_price">
               <h4>
-                <a href="single.html">Farenheit Oval </a>
+                <a href="single.html"><%= product.name %> </a>
               </h4>
               <div class="grid-price mt-2">
-                <span class="money ">$325.00</span>
+                <span class="money "><%= product.price%>VND</span>
               </div>
             </div>
             <ul class="stars">
@@ -57,7 +57,7 @@
               <input type="hidden" name="googles_item" value="Farenheit Oval">
               <input type="hidden" name="amount" value="325.00">
               <button type="submit" class="googles-cart pgoogles-cart">
-                <i class="fas fa-cart-plus"></i>
+                <i class="fa fa-cart-plus"></i>
               </button>
             </form>
           </div>

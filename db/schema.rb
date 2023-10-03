@@ -84,7 +84,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_25_065803) do
     t.string "name"
     t.string "phone"
     t.string "gender"
-    t.datetime "birthday"
+    t.date "birthday"
     t.string "role"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
