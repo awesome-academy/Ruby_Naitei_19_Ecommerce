@@ -2,6 +2,9 @@
 import "@hotwired/turbo-rails"
 import "controllers"
 
+//= require jquery_ujs
+//= require rails-ujs
+
 import "jquery"
 import "custom/bootstrap"
 import "custom/classie-search"

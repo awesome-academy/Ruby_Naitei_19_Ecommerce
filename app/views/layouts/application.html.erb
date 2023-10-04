@@ -8,9 +8,10 @@
 
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta charset="utf-8">
-    <script>
+    <script type="module">
       addEventListener("load", function () {
         setTimeout(hideURLbar, 0);
       }, false);
@@ -21,16 +22,11 @@
     </script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <link href="//fonts.googleapis.com/css?family=Inconsolata:400,700" rel="stylesheet">
-    <link href="//fonts.googleapis.com/css?family=Poppins:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="//fonts.googleapis.com/css?family=Poppins:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800"
+        rel="stylesheet">
   </head>
 
   <body>
-    <% flash.each do |type, msg| %>
-      <div>
-        <%= msg %>
-      </div>
-    <% end %>
     <%= render partial: "layouts/header" %>
     <%= yield %>
     <%= render partial: "layouts/footer" %>
