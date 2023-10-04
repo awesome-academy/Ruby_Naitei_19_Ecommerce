@@ -40,7 +40,20 @@ class CartsController < ApplicationController
       OrderProduct.create(order_id: order[0].id,
                           product_id: params[:product_id], order_quantity: 1, product_price: 0)
     end
+    flash[:notice] = "Added successfully"
     render "products/index"
+  end
+
+  def checkout
+    @products.each do |product|
+      if(product.order_quantity > product.number)
+        flash[:alert] = "There are only #{product.number} #{product.name} left"
+        redirect_to cart_path and return
+      end
+    end
+    flash[:notice] = "Order created successfully, waiting for admin"
+    Order.find_by(id: params[:order_id]).update(order_status: 1)
+    redirect_to products_path
   end
 
   private

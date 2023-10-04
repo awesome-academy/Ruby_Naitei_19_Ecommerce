@@ -20,6 +20,10 @@
   font-family: FontAwesome;
 }
 
+body {
+  position:relative;
+}
+
 .inner-sec-shop {
   position: relative;
 }
@@ -70,4 +74,15 @@
 
 .filter__icon{
   font-size: 2rem;
+}
+
+.flash__message {
+  width: 50rem;
+  height: 30rem;
+  position: absolute;
+  top: 5rem;
+  right: 5rem;
+  background-color: white;
+  color: red;
+  z-index: 100;
 }

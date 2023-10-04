@@ -2,6 +2,7 @@ Rails.application.routes.draw do
   scope "(:locale)", locale: /en|vi/ do
     resources :products
     resources :users
+    resources :orders
     resource :cart
     get "/signup", to: "users#new"
     get "/filter", to: "products#filter"
@@ -12,5 +13,6 @@ Rails.application.routes.draw do
     get "/profile", to: "users#show"
     post "/add_to_cart", to: "carts#add_to_cart"
     get "/remove_from_cart", to: "carts#remove_from_cart"
+    get "/checkout", to: "carts#checkout"
   end
 end
