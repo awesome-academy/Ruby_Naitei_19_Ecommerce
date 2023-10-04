@@ -5,7 +5,7 @@
         <img src=<%= product.product_images[0].image%> class="img-fluid" alt="">
         <div class="men-cart-pro">
           <div class="inner-men-cart-pro">
-            <a href="single.html" class="link-product-add-cart">Quick View</a>
+            <%= link_to "Quick View", product, class: "link-product-add-cart" %>
           </div>
         </div>
         <span class="product-new-top">New</span>
@@ -16,7 +16,7 @@
           <div class="grid_meta">
             <div class="product_price">
               <h4>
-                <a href="single.html"><%= product.name %> </a>
+                <%= link_to product.name, product %>
               </h4>
               <div class="grid-price mt-2">
                 <span class="money "><%= product.price%>VND</span>
@@ -51,15 +51,11 @@
             </ul>
           </div>
           <div class="googles single-item hvr-outline-out">
-            <form action="#" method="post">
-              <input type="hidden" name="cmd" value="_cart">
-              <input type="hidden" name="add" value="1">
-              <input type="hidden" name="googles_item" value="Farenheit Oval">
-              <input type="hidden" name="amount" value="325.00">
-              <button type="submit" class="googles-cart pgoogles-cart">
+            <%= form_with url: add_to_cart_path(product_id: product.id) do |form| %>
+              <%= button_tag class: "googles-cart pgoogles-cart" do %>
                 <i class="fa fa-cart-plus"></i>
-              </button>
-            </form>
+              <% end %>
+            <% end %>
           </div>
         </div>
         <div class="clearfix"></div>

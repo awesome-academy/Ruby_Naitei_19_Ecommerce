@@ -1,6 +1,7 @@
 class ApplicationController < ActionController::Base
   include Pagy::Backend
   before_action :set_locale
+  include SessionsHelper
 
   private
   def set_locale
@@ -14,5 +15,14 @@ class ApplicationController < ActionController::Base
 
   def default_url_options
     {locale: I18n.locale}
+  end
+
+  def load_categories
+    @categories = Category.ordered_by_name
+  end
+
+  def load_products
+    @pagy, @products = pagy(Product.ordered_by_name,
+                            items: Settings.product_per_page)
   end
 end
