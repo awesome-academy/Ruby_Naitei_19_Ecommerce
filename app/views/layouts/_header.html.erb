@@ -62,7 +62,8 @@
             </div>
           <% else %>
             <%= link_to "Profile", profile_path, class: "btn btn-primary submit mb-4", display: "block"   %>
-            <%= link_to "Log out", logout_url, data: {turbo_method: :delete}, class: "btn btn-primary submit mb-4"  %>
+            <%= link_to "Log out", logout_url, data: {turbo_method: :delete}, class: "btn btn-primary submit mb-4", display: "block" %>
+            <%= link_to "Your orders", orders_url, class: "btn btn-primary submit mb-4" %>
           <% end %>
           <!---->
         </div>

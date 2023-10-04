@@ -1,0 +1,22 @@
+<table class="timetable_sub">
+  <thead>
+    <tr>
+      <th>SL No.</th>
+      <th>Total price</th>
+      <th>Time</th>
+      <th>Status</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @orders.each do |order| %>
+        <tr class="rem1">
+          <td class="invert"><%= link_to "Detail", order_url(id: order.id) %></td>
+          <td class="invert">
+            <%= order.total_price %>
+          </td>
+          <td class="invert"><%= order.created_at %> </td>
+          <td class="invert"><%= order.order_status %></td>
+        </tr>
+    <% end %>
+  </tbody>
+</table>

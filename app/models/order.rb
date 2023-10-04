@@ -6,4 +6,5 @@ class Order < ApplicationRecord
 
   enum :order_status, [:in_cart, :pending, :approved]
   scope :by_user_id, ->(user_id){where user_id:}
+  scope :by_id, ->(id){where id: id}
 end
