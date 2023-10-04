@@ -8,6 +8,9 @@
 
 User.create!(name: "Example Admin",email: "admin@railstutorial.org",password: "foobar",password_confirmation: "foobar", role: "admin")
 User.create!(name: "Example User",email: "user@railstutorial.org",password: "foobar",password_confirmation: "foobar", role: "user")
+User.create!(name: "Example User 1",email: "user1@railstutorial.org",password: "foobar",password_confirmation: "foobar", role: "user")
+User.create!(name: "Example User 2",email: "user2@railstutorial.org",password: "foobar",password_confirmation: "foobar", role: "user")
+
 
 10.times do |n|
   name = "Category #{n+1}"
@@ -29,4 +32,11 @@ end
     product_id = n+1
     ProductImage.create!(image: image,product_id: product_id)
   end
+end
+
+10.times do |n|
+  name = "Category #{n+1}"
+  description = "This is a category"
+
+  Category.create!(name: name, description: description)
 end

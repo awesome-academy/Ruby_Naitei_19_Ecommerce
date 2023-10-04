@@ -19,8 +19,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_25_065803) do
   end
 
   create_table "order_products", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
-    t.integer "number"
-    t.integer "price"
+    t.integer "order_quantity"
+    t.integer "product_price"
     t.bigint "order_id", null: false
     t.bigint "product_id", null: false
     t.datetime "created_at", null: false
