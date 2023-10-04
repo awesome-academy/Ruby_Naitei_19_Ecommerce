@@ -16,7 +16,7 @@ User.create!(name: "Example User 2",email: "user2@railstutorial.org",password: "
   name = "Category #{n+1}"
   description = "This is a category"
 
-  Category.create!(name: name, description: description)
+  Category.create!(category_name: name, description: description)
 end
 
 50.times do |n|
@@ -32,11 +32,4 @@ end
     product_id = n+1
     ProductImage.create!(image: image,product_id: product_id)
   end
-end
-
-10.times do |n|
-  name = "Category #{n+1}"
-  description = "This is a category"
-
-  Category.create!(name: name, description: description)
 end

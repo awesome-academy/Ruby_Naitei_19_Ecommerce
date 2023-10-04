@@ -1,301 +1,201 @@
 <!DOCTYPE html>
 <html lang="zxx">
-<body>
-	<div class="banner-top container-fluid" id="home">
-		<!-- banner -->
-		<div class="banner_inner">
-			<div class="services-breadcrumb">
-				<div class="inner_breadcrumb">
+	<body>
+		<div class="banner-top container-fluid" id="home">
+			<!-- banner -->
+			<div class="banner_inner">
+				<div class="services-breadcrumb">
+					<div class="inner_breadcrumb">
 
-					<ul class="short">
-						<li>
-							<a href="index.html">Home</a>
-							<i>|</i>
-						</li>
-						<li>Checkout </li>
-					</ul>
+						<ul class="short">
+							<li>
+								<a href="index.html">Home</a>
+								<i>|</i>
+							</li>
+							<li>Checkout </li>
+						</ul>
+					</div>
 				</div>
-			</div>
 
+			</div>
+			<!--//banner -->
 		</div>
-		<!--//banner -->
-	</div>
-	<!--// header_top -->
-	<!--checkout-->
-	<section class="banner-bottom-wthreelayouts py-lg-5 py-3">
-		<div class="container">
-			<div class="inner-sec-shop px-lg-4 px-3">
-				<h3 class="tittle-w3layouts my-lg-4 mt-3">Checkout </h3>
-				<div class="checkout-right">
-					<h4>Your shopping cart contains:
-						<span><%= @products.count() %> products</span>
-					</h4>
-					<table class="timetable_sub">
-						<thead>
-							<tr>
-								<th>SL No.</th>
-								<th>Product</th>
-								<th>Quantity</th>
-								<th>Product Name</th>
-								<th>Price</th>
-								<th>Remove</th>
-							</tr>
-						</thead>
-						<tbody>
-						<% @products.each do |product| %>
-            <%= form_with(local: false, method: :patch) do |form| %>
-							<%= hidden_field_tag :product_id, product.product_id %>
-							<%= hidden_field_tag :order_id, product.order_id %>
-							<tr class="rem1">
-								<td class="invert">1</td>
-								<td class="invert-image">
-									<a href="single.html">
-										<img src=<%= @images[0].image%> alt=" " class="img-responsive">
-									</a>
-								</td>
-								<td class="invert">
-									<div class="quantity">
-										<div class="quantity-select">
-											<%= button_tag(name: 'minus', style: "background-color: transparent; border: none")  do %>
-												<div class="entry value-minus">&nbsp;</div>
-											<%end%>
-											<div class="entry value">
-												<%= form.text_field :quantity, value: product.order_quantity, style: "width: 100%; border: none; background-color: transparent", id: "quantity_input" %>
+		<!--// header_top -->
+		<!--checkout-->
+		<section class="banner-bottom-wthreelayouts py-lg-5 py-3">
+			<div class="container">
+				<div class="inner-sec-shop px-lg-4 px-3">
+					<h3 class="tittle-w3layouts my-lg-4 mt-3">Checkout </h3>
+					<div class="checkout-right">
+						<h4>Your shopping cart contains:
+							<span><%= @products.count() %> products</span>
+						</h4>
+						<table class="timetable_sub">
+							<thead>
+								<tr>
+									<th>SL No.</th>
+									<th>Product</th>
+									<th>Quantity</th>
+									<th>Product Name</th>
+									<th>Price</th>
+									<th>Remove</th>
+								</tr>
+							</thead>
+							<% @products.each do |product| %>
+								<%= form_tag '/cart', remote: true, method: :patch do |form| %>
+									<tbody>
+									<%= hidden_field_tag :product_id, product.product_id %>
+									<%= hidden_field_tag :order_id, product.order_id %>
+									<tr class="rem1">
+										<td class="invert">1</td>
+										<td class="invert-image">
+											<a href="single.html">
+												<img src=<%= @images[0].image%> alt=" " class="img-responsive">
+											</a>
+										</td>
+										<td class="invert">
+											<div class="quantity">
+												<div class="quantity-select">
+													<%= button_tag(name: 'minus', style: "background-color: transparent; border: none")  do %>
+														<div class="entry value-minus">&nbsp;</div>
+													<%end%>
+													<div class="entry value">
+														<%= text_field_tag :quantity, value: product.order_quantity, style: "width: 100%; border: none; background-color: transparent", id: "quantity_input" %>
+													</div>
+													<%= button_tag(name: "plus", style: "background-color: transparent; border: none") do %>
+														<div class="entry value-plus active">&nbsp;</div>
+													<%end%>
+												</div>
 											</div>
-											<%= button_tag(name: "plus", style: "background-color: transparent; border: none") do %>
-												<div class="entry value-plus active">&nbsp;</div>
-											<%end%>
-										</div>
-									</div>
-								</td>
-								<td class="invert"><%= product.name %> </td>
-								<td class="invert"><%= product.price * product.order_quantity %></td>
-								<td class="invert">
-									<div class="rem">
-										<%= link_to remove_from_cart_path(order_id: product.order_id, product_id: product.product_id), remote:true, class: "googles-cart pgoogles-cart", style: "color: black", method: :delete do %>
-											<i class="fa fa-trash" style="cursor: pointer; font-size: large"></i>
-										<% end %>
-									</div>
-								</td>
-							</tr>
+										</td>
+										<td class="invert"><%= product.name %> </td>
+										<td class="invert"><%= product.price * product.order_quantity %></td>
+										<td class="invert">
+											<div class="rem">
+												<%= link_to remove_from_cart_path(order_id: product.order_id, product_id: product.product_id), remote:true, class: "googles-cart pgoogles-cart", style: "color: black", method: :delete do %>
+													<i class="fa fa-trash" style="cursor: pointer; font-size: large"></i>
+												<% end %>
+											</div>
+										</td>
+									</tr>
+									</tbody>
+								<% end %>
 							<% end %>
-              <% end %>
-						</tbody>
-					</table>
-				</div>
-				<div class="checkout-left row">
-					<div class="col-md-4 checkout-left-basket">
-						<h4>Continue to basket</h4>
-            <% @products.each do |product| %>
-              <ul>
-                <li><%= product.name %>
-                  <i>-</i>
-                  <span><%= product.price * product.order_quantity %> </span>
-                </li>
-              </ul>
-            <% end %>
+						</table>
 					</div>
-					<div class="col-md-8 address_form">
-						<h4>Add a new Details</h4>
-						<form action="payment.html" method="post" class="creditly-card-form agileinfo_form">
-							<section class="creditly-wrapper wrapper">
-								<div class="information-wrapper">
-									<div class="first-row form-group">
-										<div class="controls">
-											<label class="control-label">Full name: </label>
-											<input class="billing-address-name form-control" type="text" name="name" placeholder="Full name">
-										</div>
-										<div class="card_number_grids">
-											<div class="card_number_grid_left">
-												<div class="controls">
-													<label class="control-label">Mobile number:</label>
-													<input class="form-control" type="text" placeholder="Mobile number">
-												</div>
-											</div>
-											<div class="card_number_grid_right">
-												<div class="controls">
-													<label class="control-label">Landmark: </label>
-													<input class="form-control" type="text" placeholder="Landmark">
-												</div>
-											</div>
-											<div class="clear"> </div>
-										</div>
-										<div class="controls">
-											<label class="control-label">Town/City: </label>
-											<input class="form-control" type="text" placeholder="Town/City">
-										</div>
-										<div class="controls">
-											<label class="control-label">Address type: </label>
-											<select class="form-control option-w3ls">
-												<option>Office</option>
-												<option>Home</option>
-												<option>Commercial</option>
-
-											</select>
-										</div>
-									</div>
-									<button class="submit check_out">Delivery to this Address</button>
-								</div>
-							</section>
-						</form>
-						<div class="checkout-right-basket">
-							<a href="payment.html">Make a Payment </a>
+					<div class="checkout-left row">
+						<div class="col-md-4 checkout-left-basket">
+							<h4>Continue to basket</h4>
+							<% @products.each do |product| %>
+								<ul>
+									<li><%= product.name %>
+										<i>-</i>
+										<span><%= product.price * product.order_quantity %> </span>
+									</li>
+								</ul>
+							<% end %>
 						</div>
+							<% unless @products.empty? %>
+								<div class="checkout-right-basket">
+										<%= link_to "Make a Payment", checkout_path(order_id: @products[0].order_id) %>
+								</div>
+							<% end %>
+						</div>
+						<div class="clearfix"> </div>
 					</div>
-					<div class="clearfix"> </div>
 				</div>
 			</div>
-		</div>
-	</section>
-	<!--//checkout-->
-	<!--jQuery-->
-	<!-- newsletter modal -->
-	<!--search jQuery-->
-	<!--//search jQuery-->
-	<!-- cart-js -->
-	<script>
-		googles.render();
-
-		googles.cart.on('googles_checkout', function (evt) {
-			var items, len, i;
-
-			if (this.subtotal() > 0) {
-				items = this.items();
-
-				for (i = 0, len = items.length; i < len; i++) {}
-			}
-		});
-	</script>
-	<!-- //cart-js -->
-	<script>
-		$(document).ready(function () {
-			$(".button-log a").click(function () {
+		</section>
+		<!--//checkout-->
+		<!--jQuery-->
+		<!-- newsletter modal -->
+		<!--search jQuery-->
+		<!--//search jQuery-->
+		<script>
+			$(document).ready(function () {
+				$(".button-log a").click(function () {
+					$(".overlay-login").fadeToggle(200);
+					$(this).toggleClass('btn-open').toggleClass('btn-close');
+				});
+			});
+			$('.overlay-close1').on('click', function () {
 				$(".overlay-login").fadeToggle(200);
-				$(this).toggleClass('btn-open').toggleClass('btn-close');
+				$(".button-log a").toggleClass('btn-open').toggleClass('btn-close');
+				open = false;
 			});
-		});
-		$('.overlay-close1').on('click', function () {
-			$(".overlay-login").fadeToggle(200);
-			$(".button-log a").toggleClass('btn-open').toggleClass('btn-close');
-			open = false;
-		});
-	</script>
-	<!-- carousel -->
-	<!-- easy-responsive-tabs -->
-	<script>
-		$(document).ready(function () {
-			$('#horizontalTab').easyResponsiveTabs({
-				type: 'default', //Types: default, vertical, accordion
-				width: 'auto', //auto or any width like 600px
-				fit: true, // 100% fit in a container
-				closed: 'accordion', // Start closed if in accordion view
-				activate: function (event) { // Callback function if tab is switched
-					var $tab = $(this);
-					var $info = $('#tabInfo');
-					var $name = $('span', $info);
-					$name.text($tab.text());
-					$info.show();
-				}
+		</script>
+		<!-- carousel -->
+		<!--quantity-->
+		<script>
+			$('.value-plus').on('click', function () {
+				var quantity_input = $(this).parent().find('#quantity_input'),
+					newVal = parseInt(quantity_input.val(), 10) + 1;
+				quantity_input.val(newVal);
 			});
-			$('#verticalTab').easyResponsiveTabs({
-				type: 'vertical',
-				width: 'auto',
-				fit: true
-			});
-		});
-	</script>
-	<!--quantity-->
-	<script>
-		$('.value-plus').on('click', function () {
-			var quantity_input = $(this).parent().find('#quantity_input'),
-				newVal = parseInt(quantity_input.val(), 10) + 1;
-			quantity_input.val(newVal);
-		});
 
-		$('.value-minus').on('click', function () {
-			var quantity_input = $(this).parent().find('#quantity_input'),
-				newVal = parseInt(quantity_input.val(), 10) - 1;
-			if (newVal >= 1) quantity_input.val(newVal);
-		});
-	</script>
-	<!--quantity-->
-	<!--close-->
-	<script>
-		$(document).ready(function (c) {
-			$('.close1').on('click', function (c) {
-				$('.rem1').fadeOut('slow', function (c) {
-					$('.rem1').remove();
+			$('.value-minus').on('click', function () {
+				var quantity_input = $(this).parent().find('#quantity_input'),
+					newVal = parseInt(quantity_input.val(), 10) - 1;
+				if (newVal >= 1) quantity_input.val(newVal);
+			});
+		</script>
+		<!--quantity-->
+		<!--close-->
+		<script>
+			$(document).ready(function (c) {
+				$('.close1').on('click', function (c) {
+					$('.rem1').fadeOut('slow', function (c) {
+						$('.rem1').remove();
+					});
 				});
 			});
-		});
-	</script>
-	<script>
-		$(document).ready(function (c) {
-			$('.close2').on('click', function (c) {
-				$('.rem2').fadeOut('slow', function (c) {
-					$('.rem2').remove();
+		</script>
+		<script>
+			$(document).ready(function (c) {
+				$('.close2').on('click', function (c) {
+					$('.rem2').fadeOut('slow', function (c) {
+						$('.rem2').remove();
+					});
 				});
 			});
-		});
-	</script>
-	<script>
-		$(document).ready(function (c) {
-			$('.close3').on('click', function (c) {
-				$('.rem3').fadeOut('slow', function (c) {
-					$('.rem3').remove();
+		</script>
+		<script>
+			$(document).ready(function (c) {
+				$('.close3').on('click', function (c) {
+					$('.rem3').fadeOut('slow', function (c) {
+						$('.rem3').remove();
+					});
 				});
 			});
-		});
-	</script>
-	<!--//close-->
+		</script>
+		<!--//close-->
 
-	<!-- dropdown nav -->
-	<script>
-		$(document).ready(function () {
-			$(".dropdown").hover(
-				function () {
-					$('.dropdown-menu', this).stop(true, true).slideDown("fast");
-					$(this).toggleClass('open');
-				},
-				function () {
-					$('.dropdown-menu', this).stop(true, true).slideUp("fast");
-					$(this).toggleClass('open');
-				}
-			);
-		});
-	</script>
-	<!-- //dropdown nav -->
-    <script>
-        jQuery(document).ready(function($) {
-            $(".scroll").click(function(event) {
-                event.preventDefault();
-                $('html,body').animate({
-                    scrollTop: $(this.hash).offset().top
-                }, 900);
-            });
-        });
-    </script>
-    <script>
-        $(document).ready(function() {
-            /*
-            						var defaults = {
-            							  containerID: 'toTop', // fading element id
-            							containerHoverID: 'toTopHover', // fading element hover id
-            							scrollSpeed: 1200,
-            							easingType: 'linear'
-            						 };
-            						*/
-
-            $().UItoTop({
-                easingType: 'easeOutQuart'
-            });
-
-        });
-    </script>
-    <!--// end-smoth-scrolling -->
-
-
-	<!-- js file -->
-</body>
-
+		<!-- dropdown nav -->
+		<script>
+			$(document).ready(function () {
+				$(".dropdown").hover(
+					function () {
+						$('.dropdown-menu', this).stop(true, true).slideDown("fast");
+						$(this).toggleClass('open');
+					},
+					function () {
+						$('.dropdown-menu', this).stop(true, true).slideUp("fast");
+						$(this).toggleClass('open');
+					}
+				);
+			});
+		</script>
+		<!-- //dropdown nav -->
+			<script>
+					jQuery(document).ready(function($) {
+							$(".scroll").click(function(event) {
+									event.preventDefault();
+									$('html,body').animate({
+											scrollTop: $(this.hash).offset().top
+									}, 900);
+							});
+					});
+			</script>
+		<!-- js file -->
+	</body>
 </html>
