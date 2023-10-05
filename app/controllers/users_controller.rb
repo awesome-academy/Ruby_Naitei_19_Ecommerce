@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :set_user, only: %i(show edit update destroy)
+  before_action :load_user, only: %i(show edit update destroy)
 
   # GET /users or /users.json
   def index
@@ -68,8 +68,12 @@ class UsersController < ApplicationController
 
   private
   # Use callbacks to share common setup or constraints between actions.
-  def set_user
+  def load_user
     @user = User.find_by id: params[:id]
+    return if @user
+
+    flash[:danger] = "Can't find user"
+    redirect_to products_url
   end
 
   # Only allow a list of trusted parameters through.

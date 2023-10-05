@@ -1,5 +1,5 @@
 class ProductsController < ApplicationController
-  before_action :set_product, only: %i(show edit update destroy)
+  before_action :load_product, only: %i(show edit update destroy)
   before_action :load_categories
   before_action :load_products
   require "pagy/extras/array"
@@ -79,10 +79,28 @@ class ProductsController < ApplicationController
     render template: "products/index"
   end
 
+  def search
+    searched_products = Product.by_price(params[:price])
+                               .by_name(params[:name])
+                               .joins(:category)
+                               .merge(Category.by_name(params[:category]))
+    @pagy, @products = pagy(searched_products,
+                            items: Settings.product_per_page)
+    render template: "products/search" and return
+  end
+
+  def render_search_page
+    render "products/search"
+  end
+
   private
   # Use callbacks to share common setup or constraints between actions.
-  def set_product
+  def load_product
     @product = Product.find_by id: params[:id]
+    return if @product
+
+    flash[:danger] = "Can't find product"
+    redirect_to products_url
   end
 
   def load_categories
