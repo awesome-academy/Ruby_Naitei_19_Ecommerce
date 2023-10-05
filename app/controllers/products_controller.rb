@@ -2,10 +2,14 @@ class ProductsController < ApplicationController
   before_action :load_product, only: %i(show edit update destroy)
   before_action :load_categories
   before_action :load_products
+  before_action :logged_in_user, only: [:edit, :new, :create, :update, :destroy]
+
   require "pagy/extras/array"
 
   # GET /products or /products.json
-  def index; end
+  def index
+    render "products/admin" if current_user&.role == "admin"
+  end
 
   # GET /products/1 or /products/1.json
   def show
@@ -98,7 +102,8 @@ class ProductsController < ApplicationController
   private
   # Use callbacks to share common setup or constraints between actions.
   def load_product
-    @product = Product.select("*").joins(:category).find_by(id: params[:id])
+    @product = Product.find_by(id: params[:id])
+    @category = @product.category.category_name
     return if @product
 
     flash[:danger] = "Can't find product"
@@ -107,39 +112,5 @@ class ProductsController < ApplicationController
   # Only allow a list of trusted parameters through.
   def product_params
     params.require(:product).permit(:name, :price, :description, :category_id)
-  end
-
-  def filter_name products, name
-    if name
-      products = products.select do |product|
-        product.name.include?(name)
-      end
-    end
-    products
-  end
-
-  def filter_category products, category
-    if category
-      products = products.select do |product|
-        Category.find_by(id: product.category_id).name == category
-      end
-    end
-    products
-  end
-
-  def filter_price products, price
-    if price == "<1tr"
-      products.select do |product|
-        product.price < 1_000_000
-      end
-    elsif price == ">5tr"
-      products.select do |product|
-        product.price > 5_000_000
-      end
-    else
-      products.select do |product|
-        product.price < 5_000_000 && product.price > 1_000_000
-      end
-    end
   end
 end

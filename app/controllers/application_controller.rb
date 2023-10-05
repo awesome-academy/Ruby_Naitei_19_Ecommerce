@@ -2,6 +2,7 @@ class ApplicationController < ActionController::Base
   include Pagy::Backend
   before_action :set_locale
   include SessionsHelper
+  include ProductsHelper
 
   private
   def set_locale
@@ -25,5 +26,19 @@ class ApplicationController < ActionController::Base
     @pagy, @products = pagy(Product.ordered_by_name.select("*")
                                     .joins(:category),
                             items: Settings.product_per_page)
+  end
+
+  def logged_in_user
+    return if logged_in?
+
+    flash[:danger] = "Please log in."
+    redirect_to products_path
+  end
+
+  def check_admin
+    return if admin?
+
+    flash[:danger] = "You don't have permission to access"
+    redirect_to products_path
   end
 end

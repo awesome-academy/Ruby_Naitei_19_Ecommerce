@@ -33,10 +33,3 @@ end
     ProductImage.create!(image: image,product_id: product_id)
   end
 end
-
-10.times do |n|
-  name = "Category #{n+1}"
-  description = "This is a category"
-
-  Category.create!(name: name, description: description)
-end

@@ -78,11 +78,16 @@ body {
 
 .flash__message {
   width: 50rem;
-  height: 30rem;
-  position: absolute;
+  height: 3rem;
   top: 5rem;
   right: 5rem;
-  background-color: white;
-  color: red;
+  background-color: red;
+  color: white;
   z-index: 100;
+}
+
+
+#products_admin {
+  display: flex;
+  flex-wrap: wrap;
 }

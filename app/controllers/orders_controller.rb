@@ -1,9 +1,11 @@
 class OrdersController < ApplicationController
   protect_from_forgery with: :null_session
+  before_action :logged_in_user
   before_action :load_orders, only: :index
   before_action :load_order, only: [:show, :destroy]
   before_action :load_products, only: :show
   before_action :load_images, only: :show
+  before_action :check_admin, only: :update
 
   def index; end
 
@@ -14,6 +16,8 @@ class OrdersController < ApplicationController
     flash[:notice] = "Cancel order successfully"
     redirect_to orders_path
   end
+
+  def update; end
 
   private
   def load_orders
@@ -26,14 +30,6 @@ class OrdersController < ApplicationController
 
     flash[:alert] = "Order doesn't exist"
     redirect_to products_path
-  end
-
-  def load_products
-    if current_user
-      @products = Product.select("*").joins(:orders).merge(Order.by_id(params[:id]))
-    else
-      redirect_to products_url
-    end
   end
 
   def load_images
