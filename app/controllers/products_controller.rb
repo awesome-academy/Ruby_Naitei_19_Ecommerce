@@ -8,7 +8,9 @@ class ProductsController < ApplicationController
   def index; end
 
   # GET /products/1 or /products/1.json
-  def show; end
+  def show
+    @images = @product.product_images
+  end
 
   # GET /products/new
   def new
@@ -96,11 +98,10 @@ class ProductsController < ApplicationController
   private
   # Use callbacks to share common setup or constraints between actions.
   def load_product
-    @product = Product.find_by id: params[:id]
+    @product = Product.select("*").joins(:category).find_by(id: params[:id])
     return if @product
 
     flash[:danger] = "Can't find product"
-    redirect_to products_url
   end
 
   def load_categories
@@ -108,7 +109,8 @@ class ProductsController < ApplicationController
   end
 
   def load_products
-    @pagy, @products = pagy(Product.ordered_by_name,
+    @pagy, @products = pagy(Product.ordered_by_name.select("*")
+                                    .joins(:category),
                             items: Settings.product_per_page)
   end
 
