@@ -22,7 +22,7 @@
                   </div>
                   <div>
                     <%= form.label :category %>
-                    <%= form.select(:category, @categories.map { |value| [ value.name, value.name ]}) %>
+                    <%= form.select(:category, @categories.map { |value| [ value.category_name, value.category_name ]}) %>
                   </div>
                   <div>
                     <%= form.label :price %>

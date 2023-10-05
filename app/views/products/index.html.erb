@@ -78,8 +78,8 @@
 
 				<ul class="filter__dropdown">
 					<% @categories.each do |category| %>
-						<%= link_to filter_path(:category => category.name) do %>
-							<li><%= category.name %></li>
+						<%= link_to filter_path(:category => category.category_name) do %>
+							<li><%= category.category_name %></li>
 						<% end %>
 					<% end %>
 				</ul>
