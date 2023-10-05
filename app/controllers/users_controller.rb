@@ -24,8 +24,8 @@ class UsersController < ApplicationController
     respond_to do |format|
       if @user.save
         format.html do
-          redirect_to user_url(@user),
-                      notice: "User was successfully created."
+          log_in @user
+          redirect_to products_url
         end
         format.json{render :show, status: :created, location: @user}
       else
@@ -63,8 +63,6 @@ class UsersController < ApplicationController
       format.json{head :no_content}
     end
   end
-
-  def login; end
 
   private
   # Use callbacks to share common setup or constraints between actions.

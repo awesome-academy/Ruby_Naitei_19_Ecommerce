@@ -71,8 +71,6 @@ class ProductsController < ApplicationController
     end
   end
 
-  def cart; end
-
   def filter
     filtered_products = Product.joins(:category)
                                .merge(Category.by_name(params[:category]))
@@ -102,16 +100,6 @@ class ProductsController < ApplicationController
     return if @product
 
     flash[:danger] = "Can't find product"
-  end
-
-  def load_categories
-    @categories = Category.ordered_by_name
-  end
-
-  def load_products
-    @pagy, @products = pagy(Product.ordered_by_name.select("*")
-                                    .joins(:category),
-                            items: Settings.product_per_page)
   end
 
   # Only allow a list of trusted parameters through.
