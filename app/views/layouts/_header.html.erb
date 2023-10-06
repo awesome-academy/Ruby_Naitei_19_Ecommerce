@@ -10,27 +10,26 @@
     </div>
     <div class="col-md-6 logo-w3layouts text-center">
       <h1 class="logo-w3layouts">
-        <a class="navbar-brand" href="index.html">
-          Goggles </a>
+        <%= link_to "E-commerce Project", products_path, class: "navbar-brand" %>
       </h1>
     </div>
 
     <div class="col-md-3 top-info-cart text-right mt-lg-4">
       <ul class="cart-inner-info">
         <li class="button-log">
-          <a class="btn-open" href="#">
-            <span class="fa fa-user" aria-hidden="true"></span>
+        <% if logged_in? %>
+          <h3 style="display: inline-block"><%= @current_user.name %></h3>
+        <%end%>
+          <a class="btn-open">
+            <span class="fa fa-user" style="cursor: pointer" aria-hidden="true"></span>
           </a>
         </li>
+        <% if logged_in? %>
         <li class="galssescart galssescart2 cart cart box_1">
-          <form action="#" method="post" class="last">
-            <input type="hidden" name="cmd" value="_cart">
-            <input type="hidden" name="display" value="1">
-            <button class="top_googles_cart" type="submit" name="submit" value="">
-              My Cart
-              <i class="fa fa-shopping-cart"></i>
-          </form>
+            <%= link_to "My Cart", cart_path, class: "top_googles_cart" %>
+            <i class="fa fa-shopping-cart"></i>
         </li>
+        <% end %>
       </ul>
       <!---->
       <div class="overlay-login text-left">
@@ -38,26 +37,33 @@
           <i class="fa fa-times" aria-hidden="true"></i>
         </button>
         <div class="wrap">
-          <h5 class="text-center mb-4">Login Now</h5>
-          <div class="login p-5 bg-dark mx-auto mw-100">
-            <form action="#" method="post">
-              <div class="form-group">
-                <label class="mb-2">Email address</label>
-                <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="" required="">
-                <small id="emailHelp" class="form-text text-muted">Well never share your email with anyone else.</small>
-              </div>
-              <div class="form-group">
-                <label class="mb-2">Password</label>
-                <input type="password" class="form-control" id="exampleInputPassword1" placeholder="" required="">
-              </div>
-              <div class="form-check mb-2">
-                <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                <label class="form-check-label" for="exampleCheck1">Check me out</label>
-              </div>
-              <button type="submit" class="btn btn-primary submit mb-4">Sign In</button>
-
-            </form>
-          </div>
+          <% if !logged_in? %>
+            <h5 class="text-center mb-4">Login Now</h5>
+            <div class="login p-5 bg-dark mx-auto mw-100">
+                <%= form_for :session, url: login_path, data: { turbo: false } do |form| %>
+                  <div class="form-group">
+                    <%= form.label :email, "Email address", class: "mb-2" %>
+                    <%= form.email_field :email, class: "form-control", id: "exampleInputEmail1" %>
+                  </div>
+                  <div class="form-group">
+                    <%= form.label :password, "Password", class: "mb-2" %>
+                    <%= form.password_field :password, class: "form-control", id: "exampleInputPassword1" %>
+                  </div>
+                  <div class="form-check mb-2">
+                    <%= form.check_box :remember_me, class: "form-check-input", id: "exampleCheck1" %>
+                    <%= form.label :remember_me, "Remember me", class: "form-check-label", for: "exampleCheck1" %>
+                  </div>
+                  <%= form.submit "Sign in", class: "btn btn-primary submit mb-4" %>
+                <% end %>
+                <div>
+                  <p>New user?</p>
+                  <%= link_to "Sign up now", signup_path, class: "btn btn-primary submit mb-4" %>
+                </div>
+            </div>
+          <% else %>
+            <%= link_to "Profile", profile_path, class: "btn btn-primary submit mb-4", display: "block"   %>
+            <%= link_to "Log out", logout_url, data: {turbo_method: :delete}, class: "btn btn-primary submit mb-4"  %>
+          <% end %>
           <!---->
         </div>
       </div>
@@ -76,9 +82,7 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav nav-mega mx-auto">
         <li class="nav-item active">
-          <a class="nav-link ml-lg-0" href="index.html">Home
-            <span class="sr-only">(current)</span>
-          </a>
+          <%= link_to "Home", products_path, class: "nav-link"  %>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="about.html">About</a>
@@ -128,7 +132,6 @@
                   <h5 class="tittle-w3layouts-sub"> Tittle goes here </h5>
                   <ul>
                     <li class="media-mini mt-3">
-
                       <a href="shop.html">Brooks Brothers</a>
                     </li>
                     <li>
@@ -161,16 +164,6 @@
                   </ul>
 
                 </div>
-                <div class="col-md-4 media-list span4 text-left">
-
-                  <h5 class="tittle-w3layouts-sub-nav">Tittle goes here </h5>
-                  <div class="media-mini mt-3">
-                    <a href="shop.html">
-                      <img src="images/g1.jpg" class="img-fluid" alt="">
-                    </a>
-                  </div>
-
-                </div>
               </div>
               <hr>
             </li>
@@ -180,7 +173,6 @@
           <a class="nav-link" href="contact.html">Contact</a>
         </li>
       </ul>
-
     </div>
   </nav>
 </header>
