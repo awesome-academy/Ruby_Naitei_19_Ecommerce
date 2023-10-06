@@ -2,10 +2,14 @@ class ProductsController < ApplicationController
   before_action :load_product, only: %i(show edit update destroy)
   before_action :load_categories
   before_action :load_products
+  before_action :logged_in_user, only: [:edit, :new, :create, :update, :destroy]
+
   require "pagy/extras/array"
 
   # GET /products or /products.json
-  def index; end
+  def index
+    render "products/admin" if current_user&.role == "admin"
+  end
 
   # GET /products/1 or /products/1.json
   def show
@@ -93,10 +97,13 @@ class ProductsController < ApplicationController
     render "products/search"
   end
 
+  def add_to_cart; end
+
   private
   # Use callbacks to share common setup or constraints between actions.
   def load_product
-    @product = Product.select("*").joins(:category).find_by(id: params[:id])
+    @product = Product.find_by(id: params[:id])
+    @category = @product.category.category_name
     return if @product
 
     flash[:danger] = "Can't find product"

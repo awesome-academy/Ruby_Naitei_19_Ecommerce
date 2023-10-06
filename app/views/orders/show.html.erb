@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="zxx">
+	<body>
+		<div class="banner-top container-fluid" id="home">
+			<!-- banner -->
+			<div class="banner_inner">
+				<div class="services-breadcrumb">
+					<div class="inner_breadcrumb">
+
+						<ul class="short">
+							<li>
+								<a href="index.html">Home</a>
+								<i>|</i>
+							</li>
+							<li>Checkout </li>
+						</ul>
+					</div>
+				</div>
+
+			</div>
+			<!--//banner -->
+		</div>
+		<!--// header_top -->
+		<!--checkout-->
+		<section class="banner-bottom-wthreelayouts py-lg-5 py-3">
+			<div class="container">
+				<div class="inner-sec-shop px-lg-4 px-3">
+					<h3 class="tittle-w3layouts my-lg-4 mt-3">Checkout </h3>
+					<div class="checkout-right">
+						<h4>Your shopping cart contains:
+							<span><%= @products.count() %> products</span>
+						</h4>
+						<table class="timetable_sub">
+							<thead>
+								<tr>
+									<th>SL No.</th>
+									<th>Product</th>
+									<th>Quantity</th>
+									<th>Product Name</th>
+									<th>Price</th>
+								</tr>
+							</thead>
+							<tbody>
+							<% @products.each do |product| %>
+                <%= form_with(local: false, method: :patch) do |form| %>
+                  <%= hidden_field_tag :product_id, product.product_id %>
+                  <%= hidden_field_tag :order_id, product.order_id %>
+                  <tr class="rem1">
+                    <td class="invert">1</td>
+                    <td class="invert-image">
+                      <a href="single.html">
+                        <img src=<%= @images[0].image%> alt=" " class="img-responsive">
+                      </a>
+                    </td>
+                    <td class="invert">
+                      <div class="quantity">
+                        <div class="quantity-select">
+                          <div class="entry value">
+                            <%= form.text_field :quantity, value: product.order_quantity, :readonly => true, style: "width: 100%; border: none; background-color: transparent", id: "quantity_input" %>
+                          </div>
+                        </div>
+                      </div>
+                    </td>
+                    <td class="invert"><%= product.name %> </td>
+                    <td class="invert"><%= product.price * product.order_quantity %></td>
+                  </tr>
+                  <% end %>
+								<% end %>
+							</tbody>
+						</table>
+					</div>
+          <div class="checkout-left row">
+						<div class="col-md-4 checkout-left-basket">
+							<h4>Continue to basket</h4>
+							<% @products.each do |product| %>
+								<ul>
+									<li><%= product.name %>
+										<i>-</i>
+										<span><%= product.price * product.order_quantity %> </span>
+									</li>
+								</ul>
+							<% end %>
+						</div>
+							<% if @order.order_status == "pending" %>
+								<div class="checkout-right-basket">
+                  <%= form_with url: "#{@order.id}", method: :delete do |form| %>
+										<%= form.submit "Cancel order", data: {confirm: "Are you sure you want to cancel this order?"} %>
+                  <% end %>
+                  </div>
+							<% end %>
+						</div>
+						<div class="clearfix"> </div>
+					</div>
+				</div>
+			</div>
+		</section>
+  </body>
+</html>

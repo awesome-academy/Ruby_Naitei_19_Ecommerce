@@ -1134,10 +1134,11 @@ ul.footer_list_icons.single_in li a:hover {
 .occasion-cart a {
 	padding: 8px 20px;
 	text-decoration: none;
-	color: #fff;
+	color: black;
 	font-size: 15px;
 	letter-spacing: 1px;
-	display: none;
+	padding: 1rem 2rem;
+	display: inline-block
 }
 .singlepage {
     float: none!important;
@@ -1405,7 +1406,7 @@ span.item_price {
     .product-men.women_two {
         padding: 0 5px;
     }
-    
+
 }
 
 @media(max-width:991px) {

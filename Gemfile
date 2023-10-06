@@ -49,6 +49,7 @@ gem "faker"
 gem "font-awesome-sass", "~> 6.4.2"
 gem "jquery-rails"
 gem "pagy"
+gem "pry-rails"
 gem "rails-i18n"
 
 # Use Sass to process CSS
